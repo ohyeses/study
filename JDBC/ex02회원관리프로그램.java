@@ -46,7 +46,7 @@ public class ex02회원관리프로그램 {
 				// DAO에서 만든 메소드를 사용하려면 객체를 만들어야 한다 -> 맨 위에 DAO 객체 생성
 				// 회원가입, 로그인, 회원탈퇴 등 모든 기능을 메서드로 다 뺄거기 때문.
 				// 사용자한테 입력받은 id·pw를 dao의 insert() 메소드의 매개변수로 보내준다.
-				// insert() 메소드의 리턴타입이 int니 int로 닫아준다.
+				// insert() 메소드의 리턴타입이 int니 int로 받아준다.
 				int result = dao.insert(id, pw, name, age);
 				
 				
