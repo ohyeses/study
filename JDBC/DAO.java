@@ -6,23 +6,23 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
-// MVC ÆÐÅÏ Áß Controller ÀÇ ¿ªÇÒÀ» ÇÑ´Ù.
-// Controller -> ¸ðµ¨ÀÌ ¡°¾î¶»°Ô¡± Ã³¸®ÇÒ Áö¸¦ Á¦¾îÇÏ´Â ¿ªÇÒÀ» ÇÑ´Ù.
+// MVC íŒ¨í„´ ì¤‘ Controller ì˜ ì—­í• ì„ í•œë‹¤.
+// Controller -> ëª¨ë¸ì´ â€œì–´ë–»ê²Œâ€ ì²˜ë¦¬í•  ì§€ë¥¼ ì œì–´í•˜ëŠ” ì—­í• ì„ í•œë‹¤.
 public class DAO {
-	// DAO -> DataBase Access ObjectÀÇ ¾àÀÚ. µ¥ÀÌÅÍº£ÀÌ½º Á¢±Ù °´Ã¼
-	// µ¥ÀÌÅÍº£ÀÌ½º¿¡ Á¢±ÙÇÏ´Â ¸ðµç °´Ã¼´Â DAO¶ó´Â Controller°¡ °ü¸®¸¦ ÇÑ´Ù.
+	// DAO -> DataBase Access Objectì˜ ì•½ìž. ë°ì´í„°ë² ì´ìŠ¤ ì ‘ê·¼ ê°ì²´
+	// ë°ì´í„°ë² ì´ìŠ¤ì— ì ‘ê·¼í•˜ëŠ” ëª¨ë“  ê°ì²´ëŠ” DAOë¼ëŠ” Controllerê°€ ê´€ë¦¬ë¥¼ í•œë‹¤.
 	
-	// 1. È¸¿ø°¡ÀÔ ¸Þ¼Òµå¸¦ ¸¸µé¾îÁØ´Ù. (INSERT)
+	// 1. íšŒì›ê°€ìž… ë©”ì†Œë“œë¥¼ ë§Œë“¤ì–´ì¤€ë‹¤. (INSERT)
 	
-	// public Á¢±ÙÁ¦ÇÑÀÚ -> ¿ÜºÎ¿¡¼­ Á¢±ÙÀ» ÇÒ ¼öÀÖ°Ô ÇÔ.
-	// ¹ÝÈ¯Çü int -> INSERT ¶ó°í ÇÏ´Â JDBC ÀÛ¾÷À» ÇØÁÖ°í ³ª¸é °á°ú°ªÀÌ intÇüÀ¸·Î ³ª¿Í¼­
-	// ¸Å°³º¯¼ö 4°³ -> °¢°¢ÀÇ ÄÃ·³À» ¸ðµÎ Ã¤¿öÁÖ±â À§ÇØ. (id, pw, name, age)
+	// public ì ‘ê·¼ì œí•œìž -> ì™¸ë¶€ì—ì„œ ì ‘ê·¼ì„ í•  ìˆ˜ìžˆê²Œ í•¨.
+	// ë°˜í™˜í˜• int -> INSERT ë¼ê³  í•˜ëŠ” JDBC ìž‘ì—…ì„ í•´ì£¼ê³  ë‚˜ë©´ ê²°ê³¼ê°’ì´ intí˜•ìœ¼ë¡œ ë‚˜ì™€ì„œ
+	// ë§¤ê°œë³€ìˆ˜ 4ê°œ -> ê°ê°ì˜ ì»¬ëŸ¼ì„ ëª¨ë‘ ì±„ì›Œì£¼ê¸° ìœ„í•´. (id, pw, name, age)
 	public int insert(String id, String pw, String name, int age) {
 		
-		int result = 0; // °á°ú°ªÀ» ´ãÀ» º¯¼ö
+		int result = 0; // ê²°ê³¼ê°’ì„ ë‹´ì„ ë³€ìˆ˜
 		
-//		JDBC´Â ¹Ýº¹ÀÛ¾÷ÀÌ´Ù. ÄÚµå°¡ ¹Ù²îÁö ¾Ê´Â´Ù.
-//		ex01_JDBCÀÇ insert¹®À» º¹ºÙÇØ¼­ °¡Á®¿Â´Ù.
+//		JDBCëŠ” ë°˜ë³µìž‘ì—…ì´ë‹¤. ì½”ë“œê°€ ë°”ë€Œì§€ ì•ŠëŠ”ë‹¤.
+//		ex01_JDBCì˜ insertë¬¸ì„ ë³µë¶™í•´ì„œ ê°€ì ¸ì˜¨ë‹¤.
 		
 		Connection conn = null;
 		PreparedStatement psmt = null;
@@ -46,30 +46,30 @@ public class DAO {
 			}
 			
 			
-			// ¸Å°³º¯¼ö·Î ¹ÞÀº ¾ÖµéÀ» ÀÔ·ÂÇØÁà¾ß ÇÑ´Ù.
-			// »ç¿ëÀÚ°¡ ¹«¾ùÀ» ÀÔ·ÂÇÒÁö ¸ð¸£´Ï ? ÀÎÀÚ¸¦ ¾´´Ù.
-			String sql  = "insert into bigdatamember values(?,?,?,?)"; // ÀÌ ¾È¿¡ Äõ¸®¸¦ ÀÛ¼ºÇÑ´Ù.
+			// ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì€ ì• ë“¤ì„ ìž…ë ¥í•´ì¤˜ì•¼ í•œë‹¤.
+			// ì‚¬ìš©ìžê°€ ë¬´ì—‡ì„ ìž…ë ¥í• ì§€ ëª¨ë¥´ë‹ˆ ? ì¸ìžë¥¼ ì“´ë‹¤.
+			String sql  = "insert into bigdatamember values(?,?,?,?)"; // ì´ ì•ˆì— ì¿¼ë¦¬ë¥¼ ìž‘ì„±í•œë‹¤.
 			
 			psmt = conn.prepareStatement(sql);
 			
 			
-			// ? ÀÎÀÚ Ã¤¿ì°í ³ª¼­ ½ÇÇàÀ» ÇØ¾ßÇÑ´Ù. executeUpdate() Àü¿¡ ÀÛ¼º.
-			// setString() -> ³Ñ°ÜÁÖ´Â ÀÎÀÚ°¡ String Å¸ÀÔÀÌ¶ó¸é
-			// setInt() -> ³Ñ°ÜÁÖ´Â ÀÎÀÚ °ªÀÌ int ¶ó¸é
-			psmt.setString(1,id); // 1¹øÂ°¿¡´Ù id¶ó´Â ¸Å°³º¯¼ö °ªÀ» ³Ö¾îÁÖ°Ú´Ù¶ó´Â ¶æ.
-			psmt.setString(2, pw); // 2¹øÂ°¿¡´Ù pw¶ó´Â ¸Å°³º¯¼ö °ªÀ» ³Ö¾îÁØ´Ù.
-			psmt.setString(3, name); // 3¹øÂ°¿¡´Ù name¶ó´Â ¸Å°³º¯¼ö °ªÀ» ³Ö¾îÁØ´Ù.
-			psmt.setInt(4, age);// 4¹øÂ°¿¡ age¸¦ ³Ö´Â´Ù. int ÇüÅÂ¿¡ string ³ÖÀ¸¸é ¿¡·¯³².
+			// ? ì¸ìž ì±„ìš°ê³  ë‚˜ì„œ ì‹¤í–‰ì„ í•´ì•¼í•œë‹¤. executeUpdate() ì „ì— ìž‘ì„±.
+			// setString() -> ë„˜ê²¨ì£¼ëŠ” ì¸ìžê°€ String íƒ€ìž…ì´ë¼ë©´
+			// setInt() -> ë„˜ê²¨ì£¼ëŠ” ì¸ìž ê°’ì´ int ë¼ë©´
+			psmt.setString(1,id); // 1ë²ˆì§¸ì—ë‹¤ idë¼ëŠ” ë§¤ê°œë³€ìˆ˜ ê°’ì„ ë„£ì–´ì£¼ê² ë‹¤ë¼ëŠ” ëœ».
+			psmt.setString(2, pw); // 2ë²ˆì§¸ì—ë‹¤ pwë¼ëŠ” ë§¤ê°œë³€ìˆ˜ ê°’ì„ ë„£ì–´ì¤€ë‹¤.
+			psmt.setString(3, name); // 3ë²ˆì§¸ì—ë‹¤ nameë¼ëŠ” ë§¤ê°œë³€ìˆ˜ ê°’ì„ ë„£ì–´ì¤€ë‹¤.
+			psmt.setInt(4, age);// 4ë²ˆì§¸ì— ageë¥¼ ë„£ëŠ”ë‹¤. int í˜•íƒœì— string ë„£ìœ¼ë©´ ì—ëŸ¬ë‚¨.
 			
 			
-			// ¿µÇâÀ» ¹ÞÀº ÇàÀÇ °³¼ö¸¦ ´ã¾Æ¼­ ¸®ÅÏÀ» ÇØÁÖ´Â º¯¼ö row¸¦ result·Î ¹Ù²Û´Ù.
+			// ì˜í–¥ì„ ë°›ì€ í–‰ì˜ ê°œìˆ˜ë¥¼ ë‹´ì•„ì„œ ë¦¬í„´ì„ í•´ì£¼ëŠ” ë³€ìˆ˜ rowë¥¼ resultë¡œ ë°”ê¾¼ë‹¤.
 			result = psmt.executeUpdate();
 			
-			// ¡é DAO¿¡¼­´Â Ãâ·Â¹®À» »ç¿ëÇØÁÖÁö ¾Ê´Â´Ù. ¡é
-			// Ãâ·ÂÇØÁÖ´Â ±¸°£Àº View¿¡°Ô ¸Ã±ä´Ù.
+			// â†“ DAOì—ì„œëŠ” ì¶œë ¥ë¬¸ì„ ì‚¬ìš©í•´ì£¼ì§€ ì•ŠëŠ”ë‹¤. â†“
+			// ì¶œë ¥í•´ì£¼ëŠ” êµ¬ê°„ì€ Viewì—ê²Œ ë§¡ê¸´ë‹¤.
 			/* 
-			 * if (row > 0) { System.out.println("Çà Ãß°¡ ¼º°ø!"); } else {
-			 * System.out.println("Çà Ãß°¡ ½ÇÆÐ..."); }
+			 * if (row > 0) { System.out.println("í–‰ ì¶”ê°€ ì„±ê³µ!"); } else {
+			 * System.out.println("í–‰ ì¶”ê°€ ì‹¤íŒ¨..."); }
 			 */ 
 			
 			
@@ -100,20 +100,20 @@ public class DAO {
 		
 		
 		return result;
-	} // È¸¿ø°¡ÀÔ ¸Þ¼Òµå ³¡
+	} // íšŒì›ê°€ìž… ë©”ì†Œë“œ ë
 	
 	
 	
-	// 2. ·Î±×ÀÎ ¼öÇàÇÏ´Â ¸Þ¼Òµå
-	// ·Î±×ÀÎÀ» Çß´Âµ¥ ÆÐ½º¿öµå¸¦ Á¦¿ÜÇÏ°í ¾ÆÀÌµð, ÀÌ¸§, ³ªÀÌ¸¦ µ¹·ÁÁØ´Ù. -> ¾ê³×¸¦ ÇÏ³ª·Î ¹­´Â ¿ÀºêÁ§Æ®¸¦ ¸¸µé¾îÁØ´Ù.
-	// public -> Á¢±ÙÁ¦ÇÑÀÚ
-	// ¸®ÅÏÅ¸ÀÔ -> MemberVO ¶ó´Â °´Ã¼·Î ¸®ÅÏ
-	// ¸Å°³º¯¼ö -> »ç¿ëÀÚ¿¡°Ô id, 
+	// 2. ë¡œê·¸ì¸ ìˆ˜í–‰í•˜ëŠ” ë©”ì†Œë“œ
+	// ë¡œê·¸ì¸ì„ í–ˆëŠ”ë° íŒ¨ìŠ¤ì›Œë“œë¥¼ ì œì™¸í•˜ê³  ì•„ì´ë””, ì´ë¦„, ë‚˜ì´ë¥¼ ëŒë ¤ì¤€ë‹¤. -> ì–˜ë„¤ë¥¼ í•˜ë‚˜ë¡œ ë¬¶ëŠ” ì˜¤ë¸Œì íŠ¸ë¥¼ ë§Œë“¤ì–´ì¤€ë‹¤.
+	// public -> ì ‘ê·¼ì œí•œìž
+	// ë¦¬í„´íƒ€ìž… -> MemberVO ë¼ëŠ” ê°ì²´ë¡œ ë¦¬í„´
+	// ë§¤ê°œë³€ìˆ˜ -> ë¡œê·¸ì¸í•  ë•Œ ì‚¬ìš©ìžì—ê²Œ id, pwë¥¼ ë°›ì•„ì˜¨ë‹¤
 	public MemberVO login(String id, String pw) {
-		MemberVO resultVO = null; // resultVO¶ó´Â ÀÌ¸§À¸·Î MemberVO °´Ã¼¸¦ ¸¸µé¾îÁØ´Ù.
-								// ¾ÆÁ÷ ¾î¶² °ªÀÌ µé¾î°¥Áö ¸ð¸£´Ï±î null À» ³Ö¾îÁØ´Ù.
+		MemberVO resultVO = null; // resultVOë¼ëŠ” ì´ë¦„ìœ¼ë¡œ MemberVO ê°ì²´ë¥¼ ë§Œë“¤ì–´ì¤€ë‹¤.
+								// ì•„ì§ ì–´ë–¤ ê°’ì´ ë“¤ì–´ê°ˆì§€ ëª¨ë¥´ë‹ˆê¹Œ null ì„ ë„£ì–´ì¤€ë‹¤.
 		
-		// ex02Select ¿¡¼­ Çß´ø ÄÚµå¸¦ ±Ü¾î¿Â´Ù.
+		// ex02Select ì—ì„œ í–ˆë˜ ì½”ë“œë¥¼ ê¸ì–´ì˜¨ë‹¤.
 		Connection conn = null;
 		PreparedStatement psmt = null;
 		ResultSet rs = null;
@@ -130,29 +130,29 @@ public class DAO {
 			conn = DriverManager.getConnection(url, user, password);
 
 			
-			// ·Î±×ÀÎ ÇÒ ‹š ÁÁÀº SQL Äõ¸®¹®Àº ¹»±î? Å×ÀÌºí¿¡ µ¥ÀÌÅÍ°¡ Á¸ÀçÇÏ´ÂÁö ¾ÈÇÏ´ÂÁö ºÁ¾ßÇÔ ==> SELECT
-			// bigdatamemberÀÇ ¸ðµç ÄÃ·³À» Á¶È¸ÇÑ´Ù.
-			// id¿Í pw°¡ °°¾Æ¾ß ÇÏ´Â Á¶°ÇÀ¸·Î.
-			// id¿Í pw°¡ ¹¹°¡ µé¾î¿ÃÁö ¸ð¸£´Ï ? ÀÎÀÚ¸¦ ¾´´Ù.
+			// ë¡œê·¸ì¸ í•  ë•Œ ì¢‹ì€ SQL ì¿¼ë¦¬ë¬¸ì€ ë­˜ê¹Œ? í…Œì´ë¸”ì— ë°ì´í„°ê°€ ì¡´ìž¬í•˜ëŠ”ì§€ ì•ˆí•˜ëŠ”ì§€ ë´ì•¼í•¨ ==> SELECT
+			// bigdatamemberì˜ ëª¨ë“  ì»¬ëŸ¼ì„ ì¡°íšŒí•œë‹¤.
+			// idì™€ pwê°€ ê°™ì•„ì•¼ í•˜ëŠ” ì¡°ê±´ìœ¼ë¡œ.
+			// idì™€ pwê°€ ë­ê°€ ë“¤ì–´ì˜¬ì§€ ëª¨ë¥´ë‹ˆ ? ì¸ìžë¥¼ ì“´ë‹¤.
 			String sql = "select * from bigdatamember where id = ? and pw =?"; 
 
 			psmt = conn.prepareStatement(sql);
 
-			// ? ÀÎÀÚ´Â executeQuery(), ½ÇÇàÇÏ±â Á÷Àü¿¡ Ã¤¿öÁØ´Ù.
-			psmt.setString(1, id);  // 1¹øÂ°¿¡´Ù ¸Å°³º¯¼ö·Î ¹Þ¾Æ¿Â id ¸¦ ³Ö¾îÁØ´Ù.
-			psmt.setString(2, pw); // 2¹øÂ°´Â ¸Å°³º¯¼ö·Î ¹Þ¾Æ¿Â pw¸¦ ³Ö¾îÁØ´Ù.
+			// ? ì¸ìžëŠ” executeQuery(), ì‹¤í–‰í•˜ê¸° ì§ì „ì— ì±„ì›Œì¤€ë‹¤.
+			psmt.setString(1, id);  // 1ë²ˆì§¸ì—ë‹¤ ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì•„ì˜¨ id ë¥¼ ë„£ì–´ì¤€ë‹¤.
+			psmt.setString(2, pw); // 2ë²ˆì§¸ëŠ” ë§¤ê°œë³€ìˆ˜ë¡œ ë°›ì•„ì˜¨ pwë¥¼ ë„£ì–´ì¤€ë‹¤.
 			
 			
 			rs = psmt.executeQuery();
 
 
-			//id°¡ Áßº¹ÀÌ ¾ø´Ù¸é ÇàÀÌ µü ÇÏ³ª ÀÖ´Â°Çµ¥, ÇàÀÌ ÇÏ³ª¶ó´Â ÀüÁ¦ÇÏ¿¡ while -> if·Î ¹Ù²Û´Ù.
-			// rs.next()´Â booleanÀÇ ¸®ÅÏÅ¸ÀÔÀÌ´Ù -> µ¥ÀÌÅÍ°¡ ÀÖÀ»¶§(=°á°ú°¡ TRUE ÀÏ¶§)¸¸ ½ÇÇàÇÑ´Ù.
-			if (rs.next()) { // rs ¶ó´Â Ä¿¼­¸¦ ¹ØÀ¸·Î ÇÑÄ­ ³»¸°´Ù -> °¢ ÄÃ·³¿¡ ÀÖ´Â µ¥ÀÌÅÍµéÀ» »Ì¾Æ¿Â´Ù.
+			//idê°€ ì¤‘ë³µì´ ì—†ë‹¤ë©´ í–‰ì´ ë”± í•˜ë‚˜ ìžˆëŠ”ê±´ë°, í–‰ì´ í•˜ë‚˜ë¼ëŠ” ì „ì œí•˜ì— while -> ifë¡œ ë°”ê¾¼ë‹¤.
+			// rs.next()ëŠ” booleanì˜ ë¦¬í„´íƒ€ìž…ì´ë‹¤ -> ë°ì´í„°ê°€ ìžˆì„ë•Œ(=ê²°ê³¼ê°€ TRUE ì¼ë•Œ)ë§Œ ì‹¤í–‰í•œë‹¤.
+			if (rs.next()) { // rs ë¼ëŠ” ì»¤ì„œë¥¼ ë°‘ìœ¼ë¡œ í•œì¹¸ ë‚´ë¦°ë‹¤ -> ê° ì»¬ëŸ¼ì— ìžˆëŠ” ë°ì´í„°ë“¤ì„ ë½‘ì•„ì˜¨ë‹¤.
 							
 				
-				// Ã³À½¿¡ ±Ü¾î¿À¸é id pw °¡ ÀÌ¸§ÀÌ Áßº¹ÀÌ µÇ¾î ¿¡·¯°¡ ¶á´Ù.
-				// Ãâ·Â¹®µéÀº ´Ù Áö¿ì±â
+				// ì²˜ìŒì— ê¸ì–´ì˜¤ë©´ id pw ê°€ ì´ë¦„ì´ ì¤‘ë³µì´ ë˜ì–´ ì—ëŸ¬ê°€ ëœ¬ë‹¤.
+				// ì¶œë ¥ë¬¸ë“¤ì€ ë‹¤ ì§€ìš°ê¸°
 				
 				String id2 = rs.getString("id");
 
@@ -162,9 +162,9 @@ public class DAO {
 				
 				int age = rs.getInt("age");
 				
-				// »Ì¾Æ¿Â id pw name age ¸¦ ´©±¸ÇÑÅ× ³Ö¾î¾ß ÇÒ±î? resultVO¿¡ ³Ö¾îÁà¾ß ÇÑ´Ù.
-				// resultVO¶ó´Â MemberVO Å¸ÀÔÀÇ °´Ã¼¸¦ »ý¼ºÇØÁÖ°í ¸Å°³º¯¼ö 4°³·Î »ý¼ºÇØÁØ´Ù.
-				// ÀÌ 4°³´Â ¿ì¸®°¡ ½ÇÁ¦ µ¥ÀÌÅÍº£ÀÌ½º¿¡¼­ ²¨³»¿Â °ªÀÎ id2, pw2, name, age ÀÌ´Ù.
+				// ë½‘ì•„ì˜¨ id pw name age ë¥¼ ëˆ„êµ¬í•œí…Œ ë„£ì–´ì•¼ í• ê¹Œ? resultVOì— ë„£ì–´ì¤˜ì•¼ í•œë‹¤.
+				// resultVOë¼ëŠ” MemberVO íƒ€ìž…ì˜ ê°ì²´ë¥¼ ìƒì„±í•´ì£¼ê³  ë§¤ê°œë³€ìˆ˜ 4ê°œë¡œ ìƒì„±í•´ì¤€ë‹¤.
+				// ì´ 4ê°œëŠ” ìš°ë¦¬ê°€ ì‹¤ì œ ë°ì´í„°ë² ì´ìŠ¤ì—ì„œ êº¼ë‚´ì˜¨ ê°’ì¸ id2, pw2, name, age ì´ë‹¤.
 				resultVO = new MemberVO(id2, pw2, name, age);
 
 			}
@@ -190,8 +190,8 @@ public class DAO {
 
 		}
 		
-		// µÎ°³ÀÇ ¸Þ¼Òµå¿¡¼­ Áßº¹µÇ´Â ºÎºÐÀÌ ÀÖ´Ù. 
-		// ¿¬µ¿ ºÎºÐ, Connection, PreparedStatement, ´Ý´Â ÀÛ¾÷ -> º°µµÀÇ ¸Þ¼Òµå·Î »«´Ù.
+		// ë‘ê°œì˜ ë©”ì†Œë“œì—ì„œ ì¤‘ë³µë˜ëŠ” ë¶€ë¶„ì´ ìžˆë‹¤. 
+		// ì—°ë™ ë¶€ë¶„, Connection, PreparedStatement, ë‹«ëŠ” ìž‘ì—… -> ë³„ë„ì˜ ë©”ì†Œë“œë¡œ ëº€ë‹¤.
 		
 		
 		
