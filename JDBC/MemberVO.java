@@ -21,6 +21,12 @@ public class MemberVO {
 		this.age = age;
 	}
 
+	// 생성자 오버로딩
+	public MemberVO(String id, String pw) {
+		this.id = id;
+		this.pw = pw;
+	}
+
 
 	// alt shift s -> Generate Getter and Setters -> Select All
 	public String getId() {

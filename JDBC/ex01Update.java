@@ -7,126 +7,107 @@ import java.sql.SQLException;
 import java.util.Scanner;
 
 public class ex01Update {
-// 에러나면 jar 파일안 넣어서 그런다.
-// 프로젝트 선택 우클 -> Build Path -> Configure Build Path -> ClassPath 선택 -> Add jar -> ojdbc6.jar 추가
+
 	public static void main(String[] args) {
-		// 객체를 전역으로 빼준다.
-		// 6번 닫기 작업할 때 conn, psmt가 지역변수라 범위를 벗어나 참조 X ->에러남
+		// 빨간줄 뜨면 import 해줄 것.!! java.sql -> Connection
 		Connection conn = null;
 		PreparedStatement psmt = null;
 
+		// 아이디, 이름을 입력 받는다.
 		Scanner sc = new Scanner(System.in);
 
-		// 사용자에게 값을 입력받는다. Scanner 사용
-		System.out.println("변경할 아이디를 입력하세요 >> ");
+		System.out.print("변경할 아이디를 입력하세요 >> ");
 		String id = sc.next();
-		System.out.println("어떤 이름으로 변경할 지 입력하세요 >> ");
-		String name = sc.next();
+		System.out.print("어떤 이름으로 변경할 지 입력하세요 >> ");
+		String name = sc.next(); // -> 사용자에게 값을 입력
+		// JDBC 코드 작성
 
+		// 1. 드라이버 동적 로딩 -> 에러 나면 프로젝트 우클릭 Build Path ->Configure Build path
 		try {
-			// 1. 드라이버 동적 로딩 => 가장 먼저 JDBC 연결 할 때 해야하는 것.
-			
-			// Class 쩜 찍고 컨+스페이스 , forName 선택
-			// Class.forName(어떤 드라이버) 해서 드라이버를 동적으로 로딩한다.
-			// 동적로딩 => 실행을 시키면서 자료형을 로딩한다.
-			// forName 변수 안에 매개변수로 주소값이 들어간다. 주소값 = 우리가 로딩하고 싶은 주소값
-			// Class.forName("oracle.jdbc.driver.OracleDriver"); 치고 빨간줄 -> 예외처리를 안해서 뜬다.
-			// Surrounded with try/catch. 예외처리를 해준다.
+
+			// Class가 가지고 있는 기능 중 forName이라는 기능을 쓴다.
+			// 그 안에다 주소값을 넣는다. 주소값은 외울 필요 없다.
+			// 빨간색 오류 => Surrounded with try catch
+			// try 안쪽에다 넣는다.
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 
-			
-			
 			// 2. 데이터베이스 연결
-			// 연결~실행하는 것까지 try~catch문 하나로 마무리를 할꺼기 때문에 안쪽에서 작성한다.
-			// DriverManager에 필요한 준비물 3개를 String 형태로 선언한다.
-			String url = "jdbc:oracle:thin:@localhost:1521:xe"; // url 외울필요 X, Data Source Explorer 에서 볼 수 있다.
-													// New Oracle 연결 안된상태면 더블클릭해서 연결시켜준다.
-													// New Oracle에서 우클 -> Properties -> Driver Properties 에 url이 있다.
+			// 아래 연결에 필요한 것들 준비 url, user, password
+			String url = "jdbc:oracle:thin:@localhost:1521:xe";
 			String user = "hr";
 			String password = "hr";
 
-			
-			
-			// DriverM 컨+스 -> 자동 임포트
-			// getConnection은 매개변수가 3개있는 걸로.
-			// 전체 빨간줄 -> 예외처리를 안해서 뜸. 2번째거 선택해 catch문 추가.
-			// Connection 빨간줄 -> 임포트 해야함. Import 'Connection' (java.sql)
-
-			// DriverManager가 가지고 있는 기능 중에 데이터베이스와 연결할 수 있는 기능인 getConnection()를 쓴다.
-			// 데이터 커넥션(연결) 하기 위해서는 url, user, password 가 필요하다.
-			// getConnection 함수는 리턴 타입이 Connection 이어서 Connection 타입으로 받아준다.
-			// Connection이란 데이터베이스와 연결하는 모든 데이터를 관리해주는 객체.
+			// 매개변수 3개가 들어가는 메서드를 사용
+			// 리턴 타입이 Connection 인 conn으로 닫아준다.
+			// 또 빨간줄 나오면 예외처리 -> 데이터베이스 관련한 예외처리 하라는 뜻
+			// 두번째꺼 클릭 -> catch문 위에 또다른 catch문.
 			conn = DriverManager.getConnection(url, user, password);
 
-			
-			// Connection이 연결 잘 됐는지 확인
-			// Connection을 conn 이라는 이름으로 줬을 때,
-			if (conn != null)
-				System.out.println("success!");
-			else
-				System.out.println("fail!"); // 여기까지 적고 실행해보자.
+			if (conn != null) {
+				System.out.println("01/15 success!");
+			} else {
+				System.out.println("fail...");
+			}
 
-			
-			
 			// 3. SQL문 작성 -> 아이디에 맞는 이름 컬럼을 변경
-			// UPDATE bigdatamember SET name = '이름" WHERE ID = '입력한 값'
-			// String sql = "UPDATE bigdatamember SET name ='"+name+"' WHERE ID = '"+id+"'";
-			// └변수를 구분하기 위해 ' 따옴표 뒤에 " 쌍따옴표를 처음과 끝에 붙히고 + 를 넣은것이다.
-			// └이렇게 하면 복잡하기 때문에 그냥 ?를 쓴다.
-			// ? -> Preparedstatement의 기능. 뭐가 올 지 모를때 쓴다.
-			String sql = "UPDATE bigdatamember SET name =  ? WHERE ID = ?";
+			// UPDATE bigdatamember SET name = '값' WHERE ID = '입력한 값'
+			// '" 싱글 뒤에 더블. 따옴표 구분 하나하나 붙여주니 복잡.
+			// 그걸 방지하기 위해서 psmt는 특이한 기능을 가지고 있다. -> statement를 쓴다.
+			// 하지만 이 값에 대해서 공간을비워놓고 준비할 수 있다.
+			// String sql = "UPDATE bigdatamember SET name = '"+name+"' WHERE ID =
+			// '"+id+"'";
+			// ?는 '나 뭐 올지 몰라' 라는 뜻.
+			// ?는 preparedstatement 만이 가지고 있는 기능. 어떤 값이 올지 모를 때 쓰는 기능.
+
+			String sql = "UPDATE bigdatamember SET name = ? WHERE ID =?";
 
 			// 4. SQL문 전송하는 객체 생성
-			// Import 'PreparedStatement' java.sql;
+			// psmt 는 conn을 통해 만들었다.
+			// 얘가 가지고있는 기능중에 preparedstatement라는 것이 있었고 sql을 매개변수로 받는다.
 			psmt = conn.prepareStatement(sql);
-			// └ sql 구문을 prepareStatement 구문에 담고, ? 인자가 들어올만한 공간들을 만든다.
 
-			// sql 생성과 execute 실행 전에 이 사이에서  ? 인자를 채워줄 수 있다.
+			// 어떤 값을 덮어씌울 때 set
 			// preparedstatement 가 가지고 있는 기능 중에 덮어 씌울 쑤 있는 기능인 set이 있다.
-			// SetString -> String 형태로 채울거다.
-			// 특이하게 1부터 시작한다. 원래 배열 0부터 시작 X
-			// psmt.setString(1.몇번째 물음표 인자, 2.채워줄 값)
-			
-			psmt.setString(1, name); // 1번째 인자를 name으로 채운다.
-			psmt.setString(2, id); // 2번째 인자를 채울거야, id 값으로.
+			// String 형태로 채울거다.
+			// 특이하게 1부터 시작한다.
+			// psmt.setString(몇번째 물음표 인자, 채워줄 값)
+			// 1- 몇번째 인자를 채워 줄건지, 2-어떤 값으로 채워줄건지
+			// 두번째 인자를 채울거야, id 값으로.
+			psmt.setString(1, name);
+			psmt.setString(2, id);
 
-			// 5. 실행 행에 영향을 주는 쿼리 
-			// 행에 영향을 끼치는 작업을 수행할 때는 -> executeUpdate
-			// executeUpdate의 리턴타입은 int 이다.
-			// int -> 영향을 받은 행의 개수
-			// => executeUpdate 하면 영향을 받은 행의 숫자가 돌아온다.
+			// 5. 실행 -> executeUpdate
+			// 행이 업데이트 되는 작업은 executeUpdate를 쓴다.
+			// 얘의 리턴타입은 int. -> 영향을 받은 행의 개수 -> row라는 이름을 준다.
 			int row = psmt.executeUpdate();
 
-			
-			// 성공했는지 실패했는지 조건판별
-			// 성공했다면 1이라는 숫자, 실패면 0 리턴
 			if (row > 0) { // row가 0보다 크다면
-				System.out.println("업데이트 성공!");
+				System.out.println("update 성공!");
+			} else { // 그렇지 않다면
+				System.out.println("update 실패!");
 			}
-			else // 그렇지 않다면
-				System.out.println("업데이트 실패!");
 
 		} catch (ClassNotFoundException e) {
 			e.printStackTrace();
 		} catch (SQLException e) {
 			e.printStackTrace();
-		} finally { //finally -> 무조건 한번은 실행해줘야 하는 구문
 			// 6. 닫기
-			// if 문 먼저 만들고 psmt.close()가 빨간줄이 난다면
-			// Surround with try/catch -> try 문 안으로 if문을 집어넣는다.
-			
+			// 닫을 때 역순으로 닫아야 하니 1. psmt 2. conn 순으로 닫아준다.
+		} finally {
 			try {
-				//★★★ 닫을 때는 자원을 할당한 역순으로 닫아줘야 한다. ★★★
-				// 즉 PreparedStatement 닫아주고 그 다음 Connection 닫아줘야 한다.
-				if (psmt != null) // PreparedStatement 객체 닫아주기
-					psmt.close(); // null이 아니었을 때, 닫아주기
+				if (psmt != null) {
+					psmt.close();
+				}
 
-				if (conn != null) // Connection 객체 닫아주기
+				if (conn != null) { // conn이 null이 아니었을 떄 null을 닫아준다.
 					conn.close();
+				}
+
 			} catch (SQLException e) {
 				e.printStackTrace();
 			}
 		}
+
 	}
 
 }
