@@ -10,9 +10,11 @@ import java.sql.SQLException;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.model.Model1DAO;
 import com.model.Model1DTO;
@@ -33,7 +35,22 @@ public class LoginProgram extends HttpServlet {
 		
 		if(name != null){
 			System.out.print("로그인성공!");
-			response.sendRedirect("loginSuccess.jsp?name="+URLEncoder.encode(name, "EUC-KR"));
+			/*
+			 * response.sendRedirect("loginSuccess.jsp?name="+URLEncoder.encode(name,
+			 * "EUC-KR"));
+			 */
+			
+			// 로그인 성공했을 때만 쿠키 만들어주기
+//			Cookie cookie = new Cookie("name",URLEncoder.encode(name, "EUC-KR"));
+//			response.addCookie(cookie);
+			
+			//세션으로 만들어주기
+			HttpSession session = request.getSession();
+			session.setAttribute("name", name); //키값-name(변수X), value값 - name(변수O)
+			
+			
+			
+			response.sendRedirect("loginSuccess.jsp");
 		}else {
 			System.out.print("로그인실패!");
 			response.sendRedirect("loginFail.jsp");
