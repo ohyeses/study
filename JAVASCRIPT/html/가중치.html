@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=<device-width>, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    /* important 키워드가 적용되면 우선순위 먼저적용 */
+#box p span{
+    color : yellow !important;
+
+}
+/* 가중치 우선순위. 태그에 먼저 적용 */
+#box .my_color span{
+    color : red;
+}
+
+</style>
+
+<body>
+    <div id="box">
+        <p class="my_color">
+            <span>안녕하세요</span>
+        </p>
+    </div>
+</body>
+</html>

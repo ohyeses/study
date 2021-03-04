@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        //1. 과목수 입력-> prompt, 과목명을 배열 1, 과목 점수 배열 1
+        // 그 정보를 바탕으로 table 태그 만들어줘야함. 3개 입력하면 3칸 만들어져야함.
+        // 동적으롤 입력한만큼 증가해야 하는 것(반복문을 통해 증가) -> td
+        // 테이블은 document.write()로 이용하자.
+        //2. 입력받은 과목 수 만큼 prompt 창이 떠야함. 과목수 3개면 prompt 3번 떠야함.
+        //3. 각각 입력받은 값마다 과목을 받아야함.
+
+        let subject_num = prompt("과목 수를 입력해주세요");
+        let subject_name = new Array(subject_num);
+        let subject_score = new Array(subject_num);
+        var sum = 0;
+        var avg = 0;
+        
+        for(var i=0; i<subject_num; i++){
+            subject_name[i] = prompt("점수를 입력할 과목명을 입력해주세요>>");
+
+        }
+
+        for(var i=0; i<subject_num; i++){
+            subject_score[i] = parseInt(prompt(subject_name[i]+"의 점수입력>>"));
+            sum += subject_score[i];
+        }
+
+        avg = parseInt(sum/subject_num);
+        console.log(sum);
+        console.log(avg);
+
+
+        document.write('<table border = 1px solid black">')
+        document.write('<tr>');
+        // for (var i=0; i<subject_num; i++){
+        //     document.write('<td>');
+        //     document.write(subject_score[i])
+        //     document.write('</td>')
+        // }
+        // document.write('</tr>');
+
+        //1행
+        document.write('<tr>');
+        for (var i=0; i<subject_num; i++){
+            document.write('<td>');
+            document.write(subject_name[i])
+            document.write('</td>')
+        }
+        document.write('<td>'+"총합"+'</td>'+'<td>'+"평균"+'</td>');
+        document.write('</tr>');
+
+        
+        //2행
+        document.write('<tr>');
+        for (var i=0; i<subject_num; i++){
+            document.write('<td>');
+            document.write(subject_score[i])
+            document.write('</td>')
+        }
+        document.write('<td>'+sum+'</td>'+'<td>'+avg+'</td>');
+        document.write('</tr>');
+
+
+
+
+
+
+
+        document.write('</table>')
+
+
+    </script>
+</body>
+</html>
