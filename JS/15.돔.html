@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+
+    <!-- 버튼을 클릭했을 때 글자를 가지고와서 출력 -->
+
+    <!-- 2. 버튼을 클릭했을 때 글자를 바꿔줌 -->
+    <p id="txt">즐거운 금요일이네요</p>
+    <button onclick="change()">클릭</button>
+
+    <script>
+        //기능 정의 - 함수
+        function change(){
+            //1. p태그의 글자를 가지고 와서 알림창에 출력.
+            let txt = document.getElementById("txt");
+            alert(txt);
+            alert(txt.innerText); //똑같은 기능을 가진 innerText가 있다.
+
+            // innerHTML 과 innerText 다른점 : 태그를 포함하는지 안 포함하는지
+            // innerText - 단순 텍스트만 보여줌.
+            // innerHTML - 태그 정보 지원
+
+            //2. p태그의 글자를 변경.
+            txt.innerHTML = "<h1>즐거운 주말이 기다려지네요!</h1>"
+            // txt.innertext = "<h1>즐거운 주말이 기다려지네요!</h1>"
+        }
+
+
+    </script>
+</body>
+</html>

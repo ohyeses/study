@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Document</title>
+    </head>
+    <body>
+
+        <p id = "num">0</p>
+        <button onclick="plus()">+1증가</button>
+        <button onclick="minus()">-1감소</button>
+
+        <script>
+            // 0이 적혀있는 공간 - > p
+            // 버튼 각각 2개 ->  함수 2개, 각각 값이 증가되게, 감소되게
+            // 조건 : 값이 0이됐을 때는 값이  더이상 감소 X
+            let value = document.getElementById("num");
+            console.log(num);
+            function plus(){
+                var num = parseInt(value.innerHTML); //글자->숫자 형변환 해줘야함
+                num++;
+                value.innerHTML = num;
+            }
+
+            function minus(){
+                var num = parseInt(value.innerHTML);
+                if(num>0){
+                    num--;
+                    value.innerHTML = num;
+                }else{
+                    return;
+                }
+            }
+        </script>
+    </body>
+    </html>
+</body>
+</html>

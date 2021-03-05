@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <ul>
+        <li>HTML</li>
+        <li>CSS</li>
+        <li>JS</li>
+    </ul>
+
+    <script>
+        // 구분자가 존재하지 않기 떄문에 li 태그로 값을 가져와야함.
+        let li = document.getElementsByTagName("li"); // 태그 네임을 이용해서 값을 가져올거야
+        console.log(li); // HTMLCollection -> 배열형태로 넘어온다 -> 인덱싱 가능
+
+        // li속에 있는 글자들을 하나씩 가지고 와서 출력을 한다
+        for(let i=0; i<li.length; i++){
+            //li 태그는 innerHTML 일까 value 일까? innerHTML -> li 라는 태그 사이에 값이 있으니까
+            alert(li[i].innerHTML); // 인덱스 번호를 이용해 데이터를 꺼내옴.
+        }
+
+    </script>
+    
+
+</body>
+</html>
