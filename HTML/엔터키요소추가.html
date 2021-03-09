@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- input tag 달았을 때 키 감지해주는 -->
+	
+	<input type="text" id="text">
+	<ul id= "item">
+	
+	</ul>
+	<script>
+	
+		// input 태그에 값을 입력하고 엔터를 눌렀을때
+		// item 아이디를 가진 태그 안에 글자를 넣어주세요
+		var text = document.querySelector('#text');
+		text.addEventListener('keydown', function(e){
+			
+			// 만약에 e.key가 Enter 라면
+			if(e.key == 'Enter'){
+				console.log(text.value); 
+				
+				
+				var ul = document.querySelector('#item');
+				var li = document.createElement('li');
+				var textNo = document.createTextNode(text.value);
+				
+				li.appendChild(textNo);
+				ul.appendChild(li);
+				
+				text.value="";
+				text.focus()
+			}
+			
+			
+			
+			
+		})
+	</script>
+</body>
+</html>
