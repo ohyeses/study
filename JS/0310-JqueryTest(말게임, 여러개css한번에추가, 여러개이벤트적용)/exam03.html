@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 클릭했을 때 글씨 색과 배경색을 바꿔준다. -->
+	<h1 class='my'>피카츄</h1>
+	<h1 class='my'>라이츄</h1>
+	<h1 class='my'>파이리</h1>
+	<h1 class='my'>꼬부기</h1>
+	<h1 class='my'>버터플</h1>
+	<h1 class='my'>야도란</h1>
+	
+	<script type="text/javascript" src="jquery-3.6.0.min.js">
+	</script>
+	<script>
+		$('.my').on('click', function(){
+			$(this).css({ //this - > 현재 상태를 저장하는 키워드
+			'color':'red',
+			'background-color':'yellow'
+			});
+		});
+	</script>
+</body>
+</html>

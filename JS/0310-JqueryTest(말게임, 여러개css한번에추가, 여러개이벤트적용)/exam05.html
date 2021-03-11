@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+
+<body>
+<!-- 여러개의 이벤트를 적용하기, 하나의 on에다 여러개의 이벤트 적용 -->
+	<p>
+		스마트인재개발원 빅데이터2차반에서 <br>
+		수강중인 박병관연수생 입니다.
+	</p>
+
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	<script>
+		// 여러개의 이벤트를 적용하기, 효율적이고 쉬운방법
+		// p태그에 클릭, 마우스 오버, 마우스 아웃 이벤트 넣어준다
+		$('p').on({
+			'click':function(){
+				$(this).css('color', 'white');
+			},
+			'mouseover':function(){
+				$(this).css('background-color', 'navy');
+			},
+			'mouseout':function(){
+				$(this).css('background-color', 'white');
+			}
+		});
+
+		
+
+	</script>
+</body>
+</html>
