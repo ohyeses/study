@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<input type = "text" id="id"> <!-- 아이디 입력 창 -->
+
+	<button id="btn">비동기통신버튼</button>
+	
+	
+	<span>
+		<!-- 서버로 부터 받아온 아이디 값을 여기 안에 출력하시오 -->
+	</span>
+		
+		<!-- 아이디중복검사 -->
+	
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	
+	
+	<script>
+		$('#btn').on('click', function() { //버튼 클릭 이벤트
+			
+			var id = $('#id').val();//버튼을 클릭하는 순간 id input 태그 안에 있는 값을 가져와야 한다.
+			
+			$.ajax({
+				url : "Hello",// 어디다가 요청을 할 지 주소를 적는 url
+				type : "GET",//데이터 전송 타입, 안써도 상관 없다->기본통신방식이 GET방식이기 때문에
+				data : "id="+id, // 데이터를 보내기 위함
+				success : function(result) {//성공했을 때 callback이 넘어온다
+					if(result == 'true'){
+						$('span').text('아이디가 중복됩니다.'); // span 태그에 출력
+					}else{
+						$('span').text('사용가능한 아이디입니다');
+					}
+					
+	
+					//console.log('success!!!'); // 성공했을 때 메시지
+					console.log(result); //result안에  서블릿에서 응답한 데이터(pbk)가 다 여기들어가있다
+
+				},// Hello 라는 서블릿을 만들어야 성공메시지가 나온다.
+				error : function() {
+					console.log('error....');// 실패했을 때 메시지
+				}
+
+			}); // ajax를 쓰기 위한 코드
+		});
+	</script>
+</body>
+</html>

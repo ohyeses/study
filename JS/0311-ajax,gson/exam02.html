@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+
+	<button id="btn">정보확인</button>
+
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+
+	<script>
+	
+	// 버튼 클릭이벤트
+	$('#btn').on('click', function(){
+		$.ajax({ //비동기통신을 한다
+			url : 'Member',// url을 member로 보낸다
+			type : 'Get',// 타입은 Get 방식
+			dataType : 'json',//JSON으로 데이터만 받아온다, dataType 명시를 해야함
+			success : function(result){//성공시 넘어오는 함수
+				// 콘솔에 결과 출력 
+ 				//console.log(result.id); // 하나씩 꺼내고 싶다면 받아온데이터.필드명 으로 확인할수있다
+				//console.log(result.pw); 
+				//console.log(result.nick);
+				
+				// console.log(result); // 콘솔로 확인시 닉네임에 한글이 깨진다-> 인코딩 타입을 UTF 로 해준다
+				
+				// 필드값 하나씩 꺼내고 싶다면 반복문 이용
+				for (var i = 0; i< result.length; i++){
+					console.log(result[i].id);
+					console.log(result[i].pw);
+					console.log(result[i].nick);
+				}
+				
+			},
+			error : function(){ //에러 발생 시 콘솔에 찍음
+				console.log('error....');
+			}
+		}); 
+	});
+	
+	</script>
+</body>
+</html>
