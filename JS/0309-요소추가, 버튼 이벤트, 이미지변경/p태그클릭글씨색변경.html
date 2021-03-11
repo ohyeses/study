@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<p id="hello" style="background-color : yellow;">
+	오늘은 화요일입니다. 오늘도 일교차가 크다고 하지 <br>
+	감기 조심하시고 항상 건강하시길 바랍니다.
+</p>
+
+<script>
+	var hello = document.querySelector('#hello');
+	
+	hello.addEventListener('dblclick', function(){
+		hello.style.backgroundColor = "red";
+	});
+	hello.addEventListener('mouseover', function(){
+		hello.style.backgroundColor = "white";
+	});
+	
+	hello.addEventListener('mouseout', function(){
+		hello.style.backgroundColor = "green";
+	});
+
+</script>
+
+</body>
+</html>
