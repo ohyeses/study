@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+<!-- 여러개의 Css 를 한번에 추가하기 -->
+	<h1 class="hello"> 만나서 반갑습니다 </h1>
+	<h1 class="hello"> 만나서 반갑습니다2 </h1>
+	<h1 class="hello"> 만나서 반갑습니다3 </h1>
+	<h1 class="hello"> 만나서 반갑습니다4 </h1>
+	
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	<script>
+		//기존 요소 선택
+/* 		$('.hello').css('color','red');
+		$('.hello').css('font-family','굴림');
+		$('.hello').css('background-color','yellow'); */
+		
+		// 여러개의 css를 한번에 주기
+		$('.hello').css({
+			'color' : 'red',
+			'font-family' : '굴림',
+			'background-color': 'yellow'
+
+		});
+	
+	</script>
+</body>
+</html>

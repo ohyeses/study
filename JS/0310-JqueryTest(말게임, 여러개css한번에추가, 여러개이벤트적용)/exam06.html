@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="EUC-KR">
+<title>Insert title here</title>
+</head>
+<body>
+	<!-- 인풋태그안에 글을 쓰고 나서 추가버튼을 누르면 ul 태그에 글을 추가하자. -->
+	<input type="text" id="text"> <!-- 인풋태그 -->
+	<button id = "btn">눌러</button> <!-- 버튼 -->
+	<ul id = "item"></ul> <!-- ul태그 -->
+	
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	<script>
+		$('#btn').on('click', function(){ //btn에다 클릭이벤트를 달아준다
+			var value = $('#text').val();//인풋태그 안에 있는 글자를 가져온다
+			
+			//인풋태그는 innerText나 innerHTML 로 가져오는게 아닌, .value()로 가져오는데
+			// jquery는 기본적으로 함수로 되있다 보니까 .val()이라는 함수로 가져온다.
+			console.log(value);
+			
+			$('#item').append('<li>'+value+'</li>'); // ul 태그에 value 값을 추가한다
+			// createElement(X), jquery는 append()를 쓴다. 가장 뒤에 추가
+			// $('#item').prepend('<li>'+value+'</li>'); // 앞으로 추가
+		});
+	
+	</script>
+</body>
+</html>

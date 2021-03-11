@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Document</title>
+<link rel="stylesheet" href="moveImgStyle.css" />
+</head>
+<body>
+	<div id="bg">
+		<img src='horse.png'>
+		<button class='btn left'>LEFT</button> <!-- 클래스 두개임 -->
+		<button class='btn right'>RIGHT</button>
+	</div>
+
+
+	<script type="text/javascript" src="jquery-3.6.0.min.js"></script>
+	<script>
+	
+	var move = 0;
+	//키보드를 눌렀을 때 움직이게
+	$('body').on('keydown', function(e){
+		console.log(e.key);
+		
+		// ArrowRight
+		// ArrowLeft
+		if (e.key == 'ArrowLeft') {
+			move += 50;
+		}else if(e.key =='ArrowRight') {
+			move -= 50;
+		}
+		$('img').css('right', move+'px');
+	});
+	
+	
+	$('.left').on('click', function() { //왼쪽 버튼의 클릭이벤트
+		move += 50;
+		$('img').css('right', move+'px'); //픽셀단위, 왼쪽버튼 눌러서 이동
+		console.log("왼쪽 클릭");
+	});
+	
+	$('.right').on('click', function() { //오른쪽 버튼의 클릭이벤트
+		move -= 50;
+		$('img').css('right', move+'px'); //픽셀단위, 왼쪽버튼 눌러서 이동
+		console.log("오른쪽 클릭");
+	});
+	
+	
+/* 	
+	
+ 		function position(o) {
+			var pos = $(o).position(); //말의 위치가 담긴 변수
+			console.log(pos);
+
+		}  */
+
+	</script>
+</body>
+</html>
